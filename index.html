@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Image Index</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; background: #f9f9f9; }
+    h1 { margin-bottom: 1rem; }
+    img { max-width: 200px; margin: 1rem; display: inline-block; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    .img-wrapper { margin: 1rem 0; }
+    .url { font-size: 0.9rem; word-break: break-all; }
+  </style>
+</head>
+<body>
+  <h1>📁 Public Images</h1>
+  <p>All images served from this GitHub Pages directory:</p>
+  <div id="gallery">Loading...</div>
+
+  <script>
+    const repoURL = "https://api.github.com/repos/laurenell-design/images/contents/images";
+    const basePath = "https://laurenell-design.github.io/images/";
+
+    fetch(repoURL)
+      .then(res => res.json())
+      .then(files => {
+        const gallery = document.getElementById("gallery");
+        gallery.innerHTML = "";
+
+        files
+          .filter(file => /\.(jpe?g|png|gif|webp|svg)$/i.test(file.name))
+          .forEach(file => {
+            const imgUrl = basePath + file.name;
+            const div = docu
